@@ -1,3 +1,5 @@
-a = float(input())
-b = float(input())
+ab = input()
+ind = ab.find(",")
+a = float(ab[:ind])
+b = float(ab[ind + 1:])
 print(a%b)
