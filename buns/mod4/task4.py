@@ -1,12 +1,35 @@
-def palindrom(word):
-    for i in range(len(word)):
-        if word[i] == word[len(word) - i - 1]:
-            continue
-            #print(word[i], end=' ')
+def check_palindrome(word):
+    letter_counts = {}
+    palindrome = ''
+    middle = ''
+    
+    for letter in word:
+        if letter in letter_counts:
+            letter_counts[letter] += 1
         else:
-            print('Не палиндром')
-            break
-    else: print('Палиндром')
+            letter_counts[letter] = 1
+    
+    for letter in letter_counts:
+        if letter_counts[letter] % 2 == 0:
+            palindrome += letter * (letter_counts[letter] // 2)
+        elif letter_counts[letter] == 1:
+            if middle == '':
+                middle = letter
+            else:
+                print('Нельзя составить палиндром')
+                return
+        else:
+            if middle == '':
+                middle = letter
+                palindrome += letter * ((letter_counts[letter] - 1) // 2)
+            else:
+                print('Нельзя составить палиндром')
+                return
+    
+    if middle != '':
+        print(palindrome + middle + palindrome[::-1])
+    else:
+        print(palindrome + palindrome[::-1])
 
 word = input('Введите слово для проверки: ')
-palindrom(word)
+check_palindrome(word)
